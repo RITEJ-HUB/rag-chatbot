@@ -7,7 +7,12 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_groq import ChatGroq
 
-load_dotenv()  # reads GROQ_API_KEY from .env
+load_dotenv(encoding="utf-8-sig", override=True)  # override=True forces a fresh read even if the env var was already cached
+
+_groq_key = os.environ.get("GROQ_API_KEY", "")
+if not _groq_key or "your_actual_key" in _groq_key:
+    st.error(f"⚠️ GROQ_API_KEY not loaded correctly. Current value starts with: '{_groq_key[:15]}...' (length: {len(_groq_key)}). Check your .env file.")
+    st.stop()
 
 st.set_page_config(page_title="RAG Chatbot — Chat with your documents", page_icon="💬", layout="wide")
 
@@ -85,7 +90,7 @@ Question: {question}
 Answer:"""
 
                 # Step 3: call the LLM
-                llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+                llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0)
                 response = llm.invoke(prompt)
                 answer = response.content
                 st.write(answer)
