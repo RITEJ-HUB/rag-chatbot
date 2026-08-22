@@ -2,6 +2,8 @@
 
 An interactive chatbot that answers questions grounded in your own documents (PDF or text), using Retrieval-Augmented Generation (RAG) instead of relying purely on an LLM's training data.
 
+**🔗 Live demo: [rag-chatbot-4nifbevynuokzfdzey2wv8.streamlit.app](https://rag-chatbot-4nifbevynuokzfdzey2wv8.streamlit.app)**
+
 ## Overview
 
 Standard LLMs can't answer questions about documents they've never seen. This project solves that with RAG: your document is split into chunks, each chunk is converted into an embedding (a numeric representation of its meaning), and stored in a local vector database. When you ask a question, the app searches for the most relevant chunks and passes them to the LLM as context — so the answer is grounded in your actual document, with the source chunks shown for transparency.
