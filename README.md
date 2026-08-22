@@ -12,7 +12,7 @@ Standard LLMs can't answer questions about documents they've never seen. This pr
 2. **Chunking** — the document is split into ~500-character chunks with overlap, using LangChain's text splitter.
 3. **Embedding** — each chunk is converted into a vector using a free, local embedding model (`sentence-transformers/all-MiniLM-L6-v2`) — no API cost for this step.
 4. **Vector search** — chunks are stored in a FAISS vector index. On each question, the top 3 most relevant chunks are retrieved.
-5. **Answer generation** — the retrieved chunks + the question are passed to an LLM (Groq's `llama-3.1-8b-instant`) to generate a grounded answer.
+5. **Answer generation** — the retrieved chunks + the question are passed to an LLM (Groq's `openai/gpt-oss-20b`) to generate a grounded answer.
 6. **Transparency** — every answer includes an expandable "Source chunks used" section, showing exactly what the model based its answer on.
 
 ## Tech Stack
@@ -21,7 +21,7 @@ Standard LLMs can't answer questions about documents they've never seen. This pr
 - **LangChain** — document loading, chunking, orchestration
 - **sentence-transformers** — local embeddings (`all-MiniLM-L6-v2`)
 - **FAISS** — vector similarity search
-- **Groq API** — fast, free-tier LLM inference (`llama-3.1-8b-instant`)
+- **Groq API** — fast, free-tier LLM inference (`openai/gpt-oss-20b`)
 - **Streamlit** — chat interface
 - **python-dotenv** — API key management
 
